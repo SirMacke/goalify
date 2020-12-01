@@ -1,11 +1,12 @@
 <template>
-  <form @submit.prevent="login">
-    <h2>Login</h2>
+  <form @submit.prevent="signUp">
+    <h2>Sign Up</h2>
     <div id="line"></div>
-    <input type="text" v-model="state.usernameOrEmail" placeholder="Username or Email">
+    <input type="text" v-model="state.username" placeholder="Username">
+    <input type="email" v-model="state.email" placeholder="Email">
     <input type="password" v-model="state.password" placeholder="Password">
-    <button type="submit">Login</button>
-    <a @click="switchToSignUp">Sign Up</a>
+    <button type="submit">Sign Up</button>
+    <a @click="switchToLogin">Login</a>
   </form>
 </template>
 
@@ -18,28 +19,30 @@ export default {
   name: 'LoginComponent',
   setup(props, ctx) {
     const state = reactive({
-      usernameOrEmail: '',
+      username: '',
+      email: '',
       password: ''
     });
 
-    function switchToSignUp() {
-      ctx.emit('switch-to-sign-up');
+    function switchToLogin() {
+      ctx.emit('switch-to-login');
     }
 
-    async function login() {
+    async function signUp() {
       const params = new URLSearchParams();
-      params.append('usernameOrEmail', state.usernameOrEmail);
+      params.append('username', state.username);
+      params.append('email', state.email);
       params.append('password', state.password);
 
-      const response = await axios.post('/api/login', params);
+      const response = await axios.post('/api/signup', params);
 
-      await store.dispatch('setUser', response.data);
+      await store.dispatch('User/setUser', response.data);
     }
 
     return {
       state,
-      switchToSignUp,
-      login
+      switchToLogin,
+      signUp
     }
   }
 }
