@@ -1,4 +1,4 @@
 {
   "jwtPrivateKey": "goalify_jwtPrivateKey",
-  "db": "goalify_db"
+  "db": "mongodb://localhost/goalify"
 }

@@ -7,7 +7,7 @@
 </script>
 
 <style lang="sass">
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap')
 
 #app
   font-family: Lato, Avenir, Helvetica, sans-serif
